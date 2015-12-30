@@ -9,10 +9,7 @@ import jpcap.packet.TCPPacket;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import com.dom.pcap.packets.CapturePacket;
 import com.dom.pcap.packets.CaptureStruct;
@@ -33,7 +30,7 @@ public class Pcap {
         NetworkInterface networkInterface = null;
 
         //for each network interface
-        for (NetworkInterface ni : interfaces ) {
+        for( NetworkInterface ni : interfaces ) {
 
             if( ni.name.contains( "en1" ) ) {
 

@@ -361,15 +361,27 @@ public final class GameEnums {
     /**
      * Where a card resides
      */
-    public enum Zone {
-        INVALID,
-        PLAY,
-        DECK,
-        HAND,
-        GRAVEYARD,
-        REMOVED_FROM_GAME,
-        SET_ASIDE,
-        SECRET
+    public enum Zone 
+    		implements IDEnum {
+        INVALID(0),
+        PLAY(1),
+        DECK(2),
+        HAND(3),
+        GRAVEYARD(4),
+        REMOVED_FROM_GAME(5),
+        SET_ASIDE(6),
+        SECRET(7);
+        
+        public final int id;
+
+        private Zone(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public int getId() {
+            return id;
+        }
     }
 
     /**
@@ -455,6 +467,7 @@ public final class GameEnums {
         NACK_OPTION(10, Packet010NackOption.class),
         GIVE_UP(11, Packet011PlayerConcede.class),
         GAME_CANCELLED(12, Packet012GameCancelled.class),
+        ENTITIES_CHOSEN(13, PacketNoAction.class),
         ALL_OPTIONS(14, Packet014AllOptions.class),
         USER_UI(15, Packet015UserUI.class),
         GAME_SETUP(16, Packet016GameSetup.class),
@@ -462,12 +475,13 @@ public final class GameEnums {
         PRE_LOAD(18, Packet018PreLoad.class),
         GAME_STATE(19, Packet019GameState.class),
         NOTIFICATION(21, Packet021Notification.class),
+        SPECTATOR_NOTIFY(24, PacketNoAction.class),
         AUTO_LOGIN(103, Packet103AutoLogin.class),
         BEGIN_PLAYING(113, Packet113ReadyMode.class),
         DEBUG_CONSOLE_COMMAND(123, Packet123DebugConsoleCommand.class),
         DEBUG_CONSOLE_RESPONSE(124, Packet124DebugConsoleResponse.class),
         GAME_STARTING(114, Packet114GameStarting.class),
-        DOM_TEST(115, Packet114GameStarting.class),
+        PING(116, PacketNoAction.class),
         AURORA_HANDSHAKE(168, Packet168AuroraHandshake.class);
 
         public final int id;

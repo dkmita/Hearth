@@ -5,5 +5,5 @@ package com.dom.game;
  */
 public class GameConstants {
 
-    public static int MAX_CARDS_IN_HAND;
+    public static int MAX_CARDS_IN_HAND = 10;
 }

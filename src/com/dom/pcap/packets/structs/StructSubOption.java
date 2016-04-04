@@ -63,4 +63,22 @@ public class StructSubOption extends CaptureStruct {
     public int[] getTargets() {
         return targets;
     }
+    
+    public String toString() {
+    	
+    	String returnString = String.valueOf( id );
+    	
+    	if( targets.length > 0 ) {
+    		returnString += "->[";
+    		for( int i = 0; i < targets.length; i++ ) {
+    			returnString += targets[i];
+    			if( i < targets.length - 1 ) {
+    				returnString += ",";
+    			}
+    		}
+    		returnString += "]";
+    	}
+    	
+    	return returnString;
+    }
 }

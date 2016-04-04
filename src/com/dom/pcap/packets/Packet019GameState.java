@@ -36,6 +36,8 @@ import com.dom.pcap.packets.structs.powerhistory.GameState;
  */
 public class Packet019GameState 
     extends CapturePacket {
+	
+	public static final boolean DEBUG_GAME_STATE = System.getProperty( "DEBUG_GAME_STATE", "false").equalsIgnoreCase( "true" );
 
     @FieldNumber(1)
     @FieldType(GameEnums.DataType.STRUCT)
@@ -58,9 +60,15 @@ public class Packet019GameState
     
     @Override
     public void postRead() {
-        System.out.println( "Processed 019GameState message with " + states.length + " states" );
+    	if( DEBUG_GAME_STATE ) {
+	        System.out.println( "Processed 019GameState message with " + states.length + " states" );
+	        for( GameState state : states ) {
+	            System.out.println( state );
+	        }
+    	}
+    	
         for( GameState state : states ) {
-            System.out.println( state );
+            state.process();
         }
     }
 }

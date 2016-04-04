@@ -31,14 +31,12 @@ public abstract class CaptureStruct {
 
     public final String _structName;
 
-
     public CaptureStruct() {
         
         _structName = getClass().getName();
     }
 
-
-    public void postRead() {
-
-    }
+    public void postRead() {};
+    
+    public void process() {};
 }

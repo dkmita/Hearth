@@ -90,35 +90,25 @@ public class HSDecoder {
             IOException {
         
         int i = Integer.valueOf( buffer.get() );
-        
         int fieldNumber = i >> 3;
-        
         int type = i & 0x07;
-        
         Field field = fieldMap.get(fieldNumber);
         
         if( field == null ) {
-            
-            throw new IOException("Unknown field " + fieldNumber + " in " + clazz.getName() + ", " + fieldMap.size() + " remaining " + fieldMap.toString() + "\n contents " + ret._structName);
+            throw new IOException( "Unknown field " + fieldNumber + " in " + clazz.getName() + ", " + fieldMap.size() + " remaining " + fieldMap.toString() + "\n contents " + ret._structName);
         }
         
         String fieldName = field.getName();
-        
         field.setAccessible( true );
-        
-        FieldType fType = field.getAnnotation(FieldType.class);
+		FieldType fType = field.getAnnotation(FieldType.class);
         
         if( fType == null ) {
-            
-            throw new IOException("Missing field type for " + field.getDeclaringClass().getName() + "#" + fieldName);
+            throw new IOException( "Missing field type for " + field.getDeclaringClass().getName() + "#" + fieldName);
         }
         
         GameEnums.DataType dataType = fType.value();
-        
         boolean isArray = field.getType().isArray();
-        
         if( ! isArray ) {
-            
             fieldMap.remove( fieldNumber );
         }
         
@@ -127,9 +117,7 @@ public class HSDecoder {
         if( isArray ) {
             
             list = workingArrays.get( field );
-            
             if( list == null ) {
-                
                 list = new ArrayList<Object>();
                 workingArrays.put( field, list );
             }
@@ -257,13 +245,13 @@ public class HSDecoder {
                         int numElements = readUnsignedVarInt( buffer );
                         for( int c = 0; c < numElements; c++ ) {
                             int val = (int) readUnsignedVarLong(buffer);
-                            Object enumVal = GameEnums.getById((Class<Enum>) field.getType(), val);
+                            Object enumVal = GameEnums.getById((Class<Enum<?>>) field.getType(), val);
                             list.add(enumVal);
                         }
                     } 
                     else {
                         int val = (int) readUnsignedVarLong( buffer );
-                        Object enumVal = GameEnums.getById((Class<Enum>) field.getType(), val);
+                        Object enumVal = GameEnums.getById((Class<Enum<?>>) field.getType(), val);
                         field.set(ret, enumVal);
                     }
                 }

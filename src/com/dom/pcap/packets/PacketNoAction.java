@@ -26,14 +26,11 @@ package com.dom.pcap.packets;
 
 
 /**
- * Sent by the server to indicate that it will being the game. Server to Client only.
- *
- * @author Vincent Zhang
+ * No action packet
  */
-public class Packet115DomTest extends CapturePacket {
+public class PacketNoAction extends CapturePacket {
 
-
-    public Packet115DomTest() {
+    public PacketNoAction() {
         super();
     }
 }

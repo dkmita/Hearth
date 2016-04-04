@@ -1,5 +1,6 @@
 package com.dom.pcap.packets.structs.powerhistory;
 
+import com.dom.game.GameStateTracker;
 import com.dom.pcap.GameEnums;
 import com.dom.pcap.packets.CaptureStruct;
 import com.dom.pcap.packets.encoding.FieldNumber;
@@ -46,9 +47,14 @@ public class GameStateTagUpdate
         return value;
     }
     
+    public void process() {
+    	if( getTag() != null ) {
+    		GameStateTracker.getCurrentGame().updateEntityTagValue( entity, tag.id, value );
+    	}
+    }
+    
     @Override
     public String toString() {
-        
-        return "Entity:" + entity + " Tag:" + ( tag != null ? tag.name() : "UKNOWN" ) + " Value:" + value;
+        return "Entity:" + entity + " Tag:" + ( tag != null ? tag.name() : "UNKNOWN" ) + " Value:" + value;
     }
 }

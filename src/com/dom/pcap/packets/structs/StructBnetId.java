@@ -57,7 +57,7 @@ public class StructBnetId extends CaptureStruct {
      */
     public UUID getUuid() {
         if (uuid == null) {
-            uuid = new UUID(highBytes, lowBytes);
+            uuid = new UUID( highBytes, lowBytes );
         }
         return uuid;
     }

@@ -24,6 +24,7 @@
 
 package com.dom.pcap.packets;
 
+import com.dom.game.GameStateTracker;
 import com.dom.pcap.GameEnums;
 import com.dom.pcap.packets.encoding.FieldNumber;
 import com.dom.pcap.packets.encoding.FieldType;
@@ -35,6 +36,8 @@ import com.dom.pcap.packets.structs.StructOption;
  * @author Vincent Zhang
  */
 public class Packet014AllOptions extends CapturePacket {
+	
+	public static final boolean DEBUG_OPTIONS = System.getProperty( "DEBUG_OPTIONS", "false").equalsIgnoreCase( "true" );
 
     @FieldNumber(1)
     @FieldType(GameEnums.DataType.INT32)
@@ -60,6 +63,18 @@ public class Packet014AllOptions extends CapturePacket {
      * Gets the list of options that can be performed.
      */
     public StructOption[] getOptions() {
+    	
         return options;
+    }
+    
+    @Override
+    public void postRead() {
+    	if( DEBUG_OPTIONS ) {
+	        System.out.println( "Processed 014GameState message with " + options.length + " options" );
+	        for( StructOption option : options ) {
+	            System.out.println( "  " + option );
+	        }
+    	}
+    	GameStateTracker.getCurrentGame().printGameState();
     }
 }

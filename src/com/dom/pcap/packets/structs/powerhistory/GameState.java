@@ -104,31 +104,47 @@ public class GameState
         return metaData;
     }
     
+    public void process() {
+    	
+        for( Field field : getClass().getDeclaredFields() ) {
+            field.setAccessible( true );
+            Object fieldValue = null;
+            
+            try {
+                fieldValue = field.get( this );
+            } 
+            catch (IllegalArgumentException e ) {
+                continue;
+            } 
+            catch (IllegalAccessException e ) {
+                e.printStackTrace();
+            }
+            
+            if( fieldValue != null && fieldValue instanceof CaptureStruct ) {
+                ( (CaptureStruct) fieldValue ).process();
+            }
+        }
+    }
+    
     
     @Override
     public String toString() {
         
         for( Field field : getClass().getDeclaredFields() ) {
-            
             field.setAccessible( true );
-            
             Object fieldValue = null;
             
             try {
-                
                 fieldValue = field.get( this );
             } 
             catch (IllegalArgumentException e ) {
-                
                 continue;
             } 
             catch (IllegalAccessException e ) {
-
                 e.printStackTrace();
             }
             
             if( fieldValue != null && fieldValue instanceof CaptureStruct ) {
-                
                 return String.format( "%-22s %s", fieldValue.getClass().getSimpleName(), fieldValue.toString() );
             }
         }

@@ -13,6 +13,7 @@ public class ByteUtils {
 	@SuppressWarnings("boxing")
     public static void printBytes( byte[] bytes, long length ) {
 	    
+		/*
 		int i = 0;
 		
 		// header is up until the first 10 byte
@@ -298,8 +299,10 @@ public class ByteUtils {
             
 			i += subLength;
 		}
+		*/
 	}
 	
+	@SuppressWarnings("unused")
 	private static String parseChar( byte[] b ) {
 		
 		try {
@@ -337,6 +340,7 @@ public class ByteUtils {
 		return i < 0 ? i + 256 : i;
 	}
 	
+	@SuppressWarnings("unused")
 	private static int getVarInt( byte[] bytes, int offset ) {
 	
         int result = 0;
